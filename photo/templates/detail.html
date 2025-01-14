@@ -1,0 +1,40 @@
+<!-- ベーステンプレートを適用する-->
+{% extends 'base.html' %}
+<!-- ヘッダー情報のページタイトルを設定する-->
+{% block title %}Photo Detail{% endblock %}
+
+      {% block contents %}
+      <!-- Bootstrapのグリッドシステム-->
+      <br>
+      <div class="container">
+        <!-- 行を配置 -->
+        <div class="row">
+          <!-- 列の左右に余白offset-3を入れる-->
+          <div class="col offset-3">
+            <!-- タイトル -->
+            <h2>{{object.title}}</h2>
+            <!-- コメント -->
+            <p>{{object.comment}}</p>
+            <br>
+            <!-- 投稿日時 -->
+            <p>{{object.posted_at}}に投稿</p>
+            <!-- 1枚目の写真 -->
+            <p><img src="{{ object.image1.url }}"></img></p>
+            <!-- 2枚目の写真が投稿されていたら表示する-->
+            {% if object.image2 %}
+              <p><img src="{{ object.image2.url }}"></img></p>
+            {% endif %}
+            
+            <!-- 投稿写真がログイン中のユーザーのものであれば削除ボタンを表示-->
+            {% if request.user == object.user %}
+            <form method="POST">
+            <!-- リンク先のURL
+                 photo/<Photo postsテーブルのid値>/delete/-->
+            <a href="{% url 'photo:photo_delete' object.pk %}"
+               class="btn btn-primary my-2">削除する</a>
+            {% endif %}
+            
+          </dv>
+        </dv>
+      </dv>
+      {% endblock %}
