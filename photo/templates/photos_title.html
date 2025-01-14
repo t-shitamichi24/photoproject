@@ -11,7 +11,7 @@
           <!-- ナビゲーションボタン -->
           {% if user.is_authenticated %}
           <!-- ログイン中のボタン -->
-          <a href="#"
+          <a href="{% url 'photo:post' %}"
              class="btn btn-primary my-2">投稿する</a>
           <a href="{% url 'accounts:logout' %}"
              class="btn btn-secondary my-2">ログアウト</a>
